@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Text #{{ object.id }}{% endblock %}
+
+{% block body_base %}
+    <div class="container my-4">
+        <h2>Text #{{ object.id }}</h2>
+        <p>{{ object.content }}</p>
+
+        <div style="width: 300px;">
+            <div style="border: 1px solid black;" class="bg-info text-light my-2 p-2">Often (5% <= count)</div>
+            <div style="border: 1px solid black;" class="bg-secondary text-light my-2 p-2">Medium (3% < count < 5%)
+            </div>
+            <div style="border: 1px solid black;" class="bg-light my-2 p-2">Rarely (3% >= count)</div>
+        </div>
+
+        <h2 class="my-4">Words</h2>
+
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for word in object.often %}
+                <tr class="bg-info">
+                    <td class="text-light">{{ word.content }}</td>
+                    <td class="text-light">{{ word.count }}</td>
+                </tr>
+            {% endfor %}
+            {% for word in object.medium %}
+                <tr class="bg-secondary">
+                    <td class="text-light">{{ word.content }}</td>
+                    <td class="text-light">{{ word.count }}</td>
+                </tr>
+            {% endfor %}
+            {% for word in object.rarely %}
+                <tr class="bg-light">
+                    <td>{{ word.content }}</td>
+                    <td>{{ word.count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
